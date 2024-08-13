@@ -1,16 +1,19 @@
-*{
+* {
   text-align: center;
 }
-body{
+
+body {
   overflow: hidden;
 }
-#homePage{
-    background-image: url(images/setAnimation.gif);
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    height: 100vh;
+
+#homePage {
+  background-image: url(images/setAnimation.gif);
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100vh;
 }
+
 #enter_btn {
   background-image: url(images/כפתור\ כניסה.svg);
   outline: none;
@@ -19,47 +22,135 @@ body{
 #submit_btn {
   background-image: url(images/login.png);
 }
-
-#level1_bth {
+#level1_bth{
   background-image: url(images/level1.png);
-  /**/
-}
 
-#level2_bth {
+}
+#level2_bth{
   background-image: url(images/level2.png);
-  /**/
+
+}
+#new_game_bth {
+  background-image: url(images/new_game.png);
+}
+#new_game {
+  background-image: url(images/new_game.png);
+}
+#amount_set {
+  background-image: url(images/amount_sets.png);
+  margin: 8px;
+  width: 150px;
+  height: 35px;
+  background-size: cover;
+  position: relative; /* חשוב למיקום ה-"0" */
 }
 
-#Instructions_bth {
-  background-image: url(images/Instructions.png);
-  /**/
+#set {
+  position: absolute; /* מאפשר מיקום מדויק */
+  top: 45%; /* מיקום אנכי - תוכל לשנות לפי הצורך */
+  left: 60%; /* מיקום אופקי - תוכל לשנות לפי הצורך */
+  transform: translate(-50%, -50%); /* מיקום במרכז - תוכל לשנות לפי הצורך */
+  color: black; /* צבע הטקסט */
+  font-size: 16px; /* גודל הטקסט */
+  font-weight: bold; /* טקסט מודגש */
 }
-#Instruction_bth {
-  background-image: url(images/Instructions.png);
-  /**/
+
+.butt{
+  margin: 8px;
+  width:  150px; 
+  height: 35px; 
+  background-size: cover; 
+  cursor: pointer; 
 }
-#Instructions_bth {
-  background-image: url(images/Instructions.png);
-  
+#Instructions_bth, #Instruction_bth {
+  background-image: url(images/instruction.png);
+
 }
-#new_game_bth  {
-  background-image: url(images/new_game.png);
-  
-}
-#add_bth {
+#add_bth{
   background-image: url(images/change_card.png);
-  
+
+
 }
-#clue_bth {
+#clue_bth{
   background-image: url(images/clue.png);
-  
+
 }
-.game_over{
-  background-image: url(images/game_over.jpg)!important;
-  /* z-index: 100; */
+#score_div {
+  background-image: url(images/score.png);  
+  margin: 8px;
+  width: 150px; 
+  height: 35px; 
+  background-size: cover;
+  position: relative; /* חשוב למיקום ה-"0" */
 }
+
+#score {
+  position: absolute; /* מאפשר מיקום מדויק */
+  top: 45%; /* מיקום אנכי */
+  left: 50%; /* מיקום אופקי */
+  transform: translate(-50%, -50%); /* מיקום במרכז */
+  color: black; /* צבע הטקסט */
+  font-size: 16px; /* גודל הטקסט */
+  font-weight: bold; /* טקסט מודגש */
+}
+
+/* .type1 {
+  position: relative;
+  padding: 1em 1.5em;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  color: #00675b;
+
+}
+
+.type1::after,
+.type1::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  border: 2px solid;
+  transition: all 0.6s ease;
+  border-radius: 2px;
+}
+
+.type1::after {
+  bottom: 0;
+  right: 0;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: #00675b;
+  border-right-color: #00675b;
+}
+
+.type1::before {
+  top: 0;
+  left: 0;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-top-color: #00675b;
+  border-left-color: #00675b;
+}
+
+.type1:hover:after,
+.type1:hover:before {
+  width: 100%;
+  height: 100%;
+}
+
+i {
+  margin-right: 8px;
+} */
+
+.game_over {
+  background-image: url(images/game_over.jpg) !important;
+}
+
 button {
-  /**/
   background: none;
   border: none;
   background-size: 100%;
@@ -69,7 +160,8 @@ button {
   background-size: contain;
   margin: auto;
 }
- .invisible {
+
+.invisible {
   display: none;
 }
 
@@ -87,9 +179,11 @@ button {
   background-color: rgba(0, 0, 0, 0.4);
   /* Black w/ opacity */
 }
-#enter_btn{
-    margin: 65vh auto 5vh auto;
+
+#enter_btn {
+  margin: 65vh auto 5vh auto;
 }
+
 #f {
   padding: 3rem;
   background-color: #fefefe;
@@ -103,165 +197,134 @@ button {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-#img_profil{
-   
-    height: 11vh;
-    margin: auto;
-    display: block;
+#img_profil {
+
+  height: 11vh;
+  margin: auto;
+  display: block;
 }
 
 
-input{
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
-    display: inline-block;
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+  display: inline-block;
 }
+
 .close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
-  }
-  .close:hover,
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
 .close:focus {
   color: red;
   cursor: pointer;
 }
- #score{
-  background-image: url(images/score.png);
-  background-size: contain;
-    background-repeat: no-repeat;
-    height: 11vh;
-    font-size: 3rem;
- } 
-#gameP{
-background-image: url(images/רקע2.png);
-display: flex;
-flex-direction: row-reverse;
-justify-content: space-around;
+#gameP {
+  background-image: url(images/רקע2.png);
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
 }
-body{
-    background-repeat: no-repeat;
-    background-size: 100vw 100vh;
-    margin: 0;
+
+body {
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  margin: 0;
 }
-#container_gameP{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-    flex-direction: row-reverse;
+
+#container_gameP {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: row-reverse;
 }
-.cards{
-    display: inline-grid;
-    grid-template-columns: auto auto auto auto;
-    gap: 10px;
-    background-color: white;
-    padding: 2rem;
-    margin: auto;
+
+.cards {
+  display: inline-grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 10px;
+  background-color: white;
+  padding: 2rem;
+  margin: auto;
 }
-.card{
-    height: 26vh;
-    width: 18vh;
-    padding: 0;
-    border-radius: 12px;
-    box-shadow: 0 10px 10px -5px #542E8C;
+
+.card {
+  height: 26vh;
+  width: 18vh;
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: 0 10px 10px -5px #542E8C;
 }
-.card_active{
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;;
- border: 2px solid black;
- border-radius: 0;
+
+.card_active {
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  ;
+  border: 2px solid black;
+  border-radius: 0;
 }
-.card>img{
-    height: 100%;
-    width: 100%;
+
+.card>img {
+  height: 100%;
+  width: 100%;
 }
+
 @keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
+  from {
+    transform: scale(0)
+  }
+
+  to {
+    transform: scale(1)
+  }
 }
-#app{
+
+#app {
   margin: 5% 0 0 0;
+  padding-right: 5vw;
+  padding-left: 1vw;
 }
+
 .base-timer {
-    position: relative;
-    width: 12vw;
-    
-  }
-  
-  .base-timer__svg {
-    transform: scaleX(-1);
-   
-  }
-  
-  .base-timer__circle {
-    fill: none;
-    stroke: none;
-  }
-  
-  .base-timer__path-elapsed {
-    stroke-width: 7px;
-    stroke: grey;
-  }
-  
-  .base-timer__path-remaining {
-    stroke-width: 7px;
-    stroke-linecap: round;
-    transform: rotate(90deg);
-    transform-origin: center;
-    transition: 1s linear all;
-    fill-rule: nonzero;
-    stroke: currentColor;
-  }
-  
-  .base-timer__path-remaining.green {
-    color: rgb(65, 184, 131);
-  }
-  
-  .base-timer__path-remaining.orange {
-    color: orange;
-  }
-  
-  .base-timer__path-remaining.red {
-    color: red;
-  }
-  
-  .base-timer__label {
-    position: absolute;
-  
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5vw;
-    margin: 35%;
-  }
-  .clue_card{
-    border: 3px solid greenyellow
-  }
-  #timer_bth{
-    display: flex;
-    flex-direction: column;
-    margin: 15vh auto 15vh auto;
-  }
-#bth{
+  position: relative;
+  width: 12vw;
+
+}
+
+.clue_card {
+  border: 3px solid greenyellow
+}
+
+#timer_bth {
+  display: flex;
+  flex-direction: row;
+  margin: 15vh auto 15vh auto;
+}
+
+#bth {
   display: flex;
   flex-direction: column;
 }
 
-.end{
+.end {
   padding-right: 5vw;
 }
+
 .tooltip {
   position: relative;
   display: inline-block;
@@ -299,4 +362,37 @@ body{
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+.base-timer-bar {
+  position: relative;
+  width: 2rem;
+  height: 30vw;
+  background-color: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.base-timer-bar__remaining {
+  width: 100%;
+  height: 100%;
+  background-color: green;
+  transition: height 1s linear, background-color 0.5s ease;
+}
+
+.base-timer-bar__label {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5vw;
+  color: #000;
+  padding-bottom: 0.5rem;
+}
+
+.timer-label {
+  text-align: center;
+  font-size: 2.5vw;
+  color: #00675b;
+  padding-bottom: 1rem;
 }

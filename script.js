@@ -88,6 +88,8 @@ var currentPage = window.location.pathname.split("/").pop().toLowerCase();
 let button_status = new Array(12).fill(false);
 let set_cards = 0;
 let count_choose_card = 0;
+let sets=0
+let score=0;
 let three_cards = new Array();
 function home_page() {
   document.getElementById("enter_btn").addEventListener("click", () => { login_form.style.display = "block" });
@@ -105,19 +107,23 @@ function the_game() {
       audio.play();
     });
     document.getElementById(i).addEventListener("click", choose_card);
-    let score=0;
-    document.getElementById("score").textContent=score;
+    
   }
+    document.getElementById("score").textContent=score;
+    document.getElementById("set").textContent=0;
   //בחירת רמה
   document.getElementById("level1_bth").addEventListener("click", () => {
     timer(300);
     document.getElementsByClassName("login_f")[0].classList.add("invisible")
   });
   document.getElementById("level2_bth").addEventListener("click", () => {
-    timer(180);
+    timer(2);
     document.getElementsByClassName("login_f")[0].classList.add("invisible")
   });
   //מאזינים לכפתורים
+  document.getElementById("new_game_bth").addEventListener("click", () => {
+    window.location.reload()
+  });
   document.getElementById("clue_bth").addEventListener("click", clue_score);
   document.getElementById("clue_bth").removeAttribute("disabled");
   document.getElementById("add_bth").addEventListener("click", switch_card);
@@ -125,9 +131,6 @@ function the_game() {
     window.open('pages/instructions.html');
   });
 
-  document.getElementById("new_game_bth").addEventListener("click", () => {
-    window.location.reload()
-  });
   document.getElementById("Instruction_bth").addEventListener("click", () => {
     window.open('pages/instructions.html');
   });
@@ -195,12 +198,17 @@ function choose_card() {
       score=parseInt(document.getElementById("score").textContent);
       score+=10;
       document.getElementById("score").textContent=score;
+      sets=parseInt(document.getElementById("set").textContent);
+      sets++;
+      document.getElementById("set").textContent=sets;
+
     }
     else{
       if (set_cards < 81){
         setTimeout(no_set, 1000);
       }
       else{
+        console.log("no set");
         onTimesUp(); 
       }
      
@@ -279,6 +287,7 @@ function no_set() {
 }
 // תובודקת אם נגמר הכרטיסים מוחקת כרטיסים מהלוח
 function end_cards(id) {
+  console.log(id);
   document.getElementById(id).removeEventListener("click", choose_card);
   document.getElementById(id).style.opacity = 0;
   document.getElementById(id).opacity=0;
@@ -336,19 +345,17 @@ return true;
 }
 let cards=new Array();
 function clue_score() {
-  if (!score) {
+  if (score==0) {
     document.getElementById("clue_bth").setAttribute("disabled", true);
     return;
   }
   else {
     cards = [...document.querySelectorAll('.card')];
-    console.log(cards);
     cards = cards.filter(card => card.style.opacity!='0');
-    console.log(cards);
-    score -= 5;
     document.getElementById("score").textContent = score;
     let fl=clue(cards);
     if (fl==true) {
+      score -= 5;
       let num = Math.floor(Math.random() * 3);
       const element = document.getElementById(three_cards[num].id);
       element.classList.add("clue_card");
@@ -401,88 +408,74 @@ function end(){
   for (const item of ends) {
     item.style.display = "none";
   }
-  document.getElementById("gameP").innerHTML += "<button id='new_game_bth' ></button>"
+  document.getElementById("gameP").innerHTML += `<button id='new_game' ></button> <div>score ${score}</div><div>set: ${sets}</div>`
+  
   document.getElementById("gameP").classList.add("game_over");
 }
-//טימר
+//טיימר
+function onTimesUp() {
+  console.log("onTimeUp");
+  clearInterval(timerInterval);
+  var ends = document.querySelectorAll(".end");
+  for (const item of ends) {
+    item.style.display = "none";
+  }
 
+  // document.getElementById("gameP").innerHTML += "<button id='new_game'></button>";
+  document.getElementById("gameP").innerHTML += `<button id='new_game' ></button> <div>score ${score}</div><div>set: ${sets}</div>`
+
+  const newGameButton = document.getElementById("new_game");
+
+  if (newGameButton) {
+    newGameButton.addEventListener("click", () => {
+      window.location.reload();
+    });
+  } else {
+    console.error("Button with ID 'new_game' not found");
+  }
+
+  document.getElementById("gameP").classList.add("game_over");
+}
 function timer(x) {
   let TIME_LIMIT = x;
-  let FULL_DASH_ARRAY = 283;
+  let FULL_BAR_HEIGHT = 100;
   const WARNING_THRESHOLD = x / 2;
   const ALERT_THRESHOLD = x / 4;
   const COLOR_CODES = {
-    info: {
-      color: "green"
-    },
-    warning: {
-      color: "orange",
-      threshold: WARNING_THRESHOLD
-    },
-    alert: {
-      color: "red",
-      threshold: ALERT_THRESHOLD
-    }
+    info: { color: "green" },
+    warning: { color: "orange", threshold: WARNING_THRESHOLD },
+    alert: { color: "red", threshold: ALERT_THRESHOLD }
   };
+
   let timePassed = 0;
   let timeLeft = TIME_LIMIT;
   let timerInterval = null;
-  let remainingPathColor = COLOR_CODES.info.color;
+
   document.getElementById("app").innerHTML = `
-    <div class="base-timer">
-      <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g class="base-timer__circle">
-          <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
-          <path
-            id="base-timer-path-remaining"
-            stroke-dasharray="283"
-            class="base-timer__path-remaining ${remainingPathColor}"
-            d="
-              M 50, 50
-              m -45, 0
-              a 45,45 0 1,0 90,0
-              a 45,45 0 1,0 -90,0
-            "
-          ></path>
-        </g>
-      </svg>
-      <span id="base-timer-label" class="base-timer__label">${formatTime(
-    timeLeft
-  )}</span>
+    <div class="timer-label" id="timer-label">${formatTime(timeLeft)}</div>
+    <div class="base-timer-bar">
+      <div id="base-timer-bar-remaining" class="base-timer-bar__remaining"></div>
     </div>
-    `;
+  `;
 
   startTimer();
 
- 
-
   function startTimer() {
     timerInterval = setInterval(() => {
-      timePassed = timePassed += 1;
+      timePassed += 1;
       timeLeft = TIME_LIMIT - timePassed;
-      document.getElementById("base-timer-label").innerHTML = formatTime(
-        timeLeft
-      );
-      setCircleDasharray();
-      setRemainingPathColor(timeLeft);
+
+      document.getElementById("timer-label").innerHTML = formatTime(timeLeft);
+      setBarHeight();
+      setRemainingBarColor(timeLeft);
 
       if (timeLeft === 0) {
         onTimesUp();
       }
     }, 1000);
   }
-  function onTimesUp() {
-    clearInterval(timerInterval);
-    var ends = document.querySelectorAll(".end");
-    for (const item of ends) {
-      item.style.display = "none";
-    }
-    document.getElementById("gameP").innerHTML += "<button id='new_game_bth' ></button>"
-    document.getElementById("new_game_bth").addEventListener("click", () => {
-      window.location.reload()
-    });
-    document.getElementById("gameP").classList.add("game_over");
-  }
+
+ 
 
   function formatTime(time) {
     const minutes = Math.floor(time / 60);
@@ -495,36 +488,19 @@ function timer(x) {
     return `${minutes}:${seconds}`;
   }
 
-  function setRemainingPathColor(timeLeft) {
+  function setRemainingBarColor(timeLeft) {
     const { alert, warning, info } = COLOR_CODES;
+    let color = info.color;
     if (timeLeft <= alert.threshold) {
-      document
-        .getElementById("base-timer-path-remaining")
-        .classList.remove(warning.color);
-      document
-        .getElementById("base-timer-path-remaining")
-        .classList.add(alert.color);
+      color = alert.color;
     } else if (timeLeft <= warning.threshold) {
-      document
-        .getElementById("base-timer-path-remaining")
-        .classList.remove(info.color);
-      document
-        .getElementById("base-timer-path-remaining")
-        .classList.add(warning.color);
+      color = warning.color;
     }
+    document.getElementById("base-timer-bar-remaining").style.backgroundColor = color;
   }
 
-  function calculateTimeFraction() {
-    const rawTimeFraction = timeLeft / TIME_LIMIT;
-    return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
-  }
-
-  function setCircleDasharray() {
-    const circleDasharray = `${(
-      calculateTimeFraction() * FULL_DASH_ARRAY
-    ).toFixed(0)} 283`;
-    document
-      .getElementById("base-timer-path-remaining")
-      .setAttribute("stroke-dasharray", circleDasharray);
+  function setBarHeight() {
+    const heightFraction = (timeLeft / TIME_LIMIT) * 100;
+    document.getElementById("base-timer-bar-remaining").style.height = `${heightFraction}%`;
   }
 }
