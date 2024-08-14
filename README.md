@@ -30,6 +30,13 @@ Below are some screenshots of the game in action:
 
 - **Game Board**:
   ![Game Board](images/game_page.png)
+  
+- **Instructions**
+
+<video width="320" height="240" controls>
+  <source src="images/How_to_Play_Set.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
   
 ## Installation
