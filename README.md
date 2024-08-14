@@ -1,5 +1,6 @@
 # Set Game
 ![Game Logo](images/setAnimation.gif)
+
 This project is a web-based implementation of the Set game, developed using HTML, CSS, and JavaScript. The focus is on correct coding practices, clean code, proper element hierarchy, and advanced, responsive design.
 
 ## Features
@@ -17,7 +18,7 @@ This project is a web-based implementation of the Set game, developed using HTML
 Below are some screenshots of the game in action:
 
 - **Home Page**:
-  ![Home Page](images/game_page.png)
+  ![Home Page](images/home_page.png)
   After you click the play button the next window will appear
 
 - **Login screen**:
